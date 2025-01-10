@@ -166,10 +166,6 @@ public abstract class EntityManager implements EntityManagerContract   {
                     for (Object obj : entities) {
                         nRows += delete(obj);
                     }
-                } else if (field.isAnnotationPresent(ManyToOne.class)
-                        && field.getAnnotation(ManyToOne.class).cascade().equals("ALL")) {
-                    field.setAccessible(true);
-                    nRows += delete(field.get(entity));
                 }
             }
             String tableName = Utils.getTableName(entity.getClass());

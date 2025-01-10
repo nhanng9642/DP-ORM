@@ -14,10 +14,11 @@ public class Main {
 
         EntityManagerLoggingProxy entityManagerLoggingProxy = new EntityManagerLoggingProxy(entityManager, new ConsoleLogging());
 
-        Employee employeeDB = entityManagerLoggingProxy.find(Employee.class, 1);
-        employeeDB.setFirstName("NewName");
+        Employee employee = new Employee("John", "Doe", null, null);
+        Employee employeeDB = entityManagerLoggingProxy.insert(employee);
 
-        entityManagerLoggingProxy.update(employeeDB);
+        Employee employee2 = entityManagerLoggingProxy.find(Employee.class, 1);
+        entityManagerLoggingProxy.delete(employee2);
 
 
     }
