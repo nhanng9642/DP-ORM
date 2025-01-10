@@ -1,4 +1,4 @@
-package org.group05.com;
+package org.group05.com.utils;
 
 import org.group05.com.annotations.*;
 
@@ -90,4 +90,6 @@ public class Utils {
         }
         throw new RuntimeException("Foreign key not found in " + childClass.getSimpleName());
     }
+
+
 }

@@ -1,6 +1,6 @@
 package org.group05.com.entityManager;
 
-import org.group05.com.Utils;
+import org.group05.com.utils.Utils;
 import org.group05.com.annotations.Id;
 import org.group05.com.annotations.ManyToOne;
 import org.group05.com.annotations.OneToMany;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class EntityManager {
+public abstract class EntityManager implements EntityManagerContract   {
     protected final Connection connection;
 
     public EntityManager(Connection connection) {
@@ -24,6 +24,7 @@ public abstract class EntityManager {
     }
 
     Map<String, Object> map = new HashMap<>();
+
 
     public <T> T insert(T entity) {
         try {

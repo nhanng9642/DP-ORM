@@ -1,0 +1,16 @@
+[2025-01-10 22:53:19] [INFO] - Finding entity: Employee with id: 1
+[2025-01-10 22:53:19] [INFO] - Updating entity: Employee {
+ id=1,
+ firstName='NewName',
+ lastName='Doe',
+ hireDate=2020-01-15,
+ salaries=1, 2, 3}
+
+[2025-01-10 22:53:36] [INFO] - Finding entity: Employee with id: 1
+[2025-01-10 22:53:36] [INFO] - Updating entity: Employee {
+ id=1,
+ firstName='NewName',
+ lastName='Doe',
+ hireDate=2020-01-15,
+ salaries=1, 2, 3}
+
