@@ -29,16 +29,22 @@ public class Employee {
     @Override
     public String toString() {
         String str =  "Employee {" +
-                "\n id=" + id +
-                ",\n firstName='" + firstName + '\'' +
-                ",\n lastName='" + lastName + '\'' +
-                ",\n hireDate=" + hireDate +
-                ",\n salaries=";
-        if (salaries != null)
+                " id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", hireDate=" + hireDate +
+                ", salaries=";
+        if (salaries != null) {
             str += salaries.stream()
-                .map(salary -> salary.id.toString())
-                .collect(Collectors.joining(", ")) +
-                "}\n";
+                    .map(salary -> {
+                        if (salary.id != null)
+                            return salary.id.toString();
+                        return "null";
+                    })
+                    .collect(Collectors.joining(", ")) +
+                    "}\n";
+        } else if (salaries.isEmpty())
+            str += "[]";
         else str += "null}\n";
         return str;
     }

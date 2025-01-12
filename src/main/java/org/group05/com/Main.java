@@ -7,18 +7,20 @@ import org.group05.com.logging.proxy.EntityManagerLoggingProxy;
 import org.group05.com.logging.strategy.impl.ConsoleLogging;
 import org.group05.com.logging.strategy.impl.FileLogging;
 
+import java.util.List;
+import java.util.Map;
+
 public class Main {
     public static void main(String[] args) {
-        EntityManagerFactory entityManagerFactory = new EntityManagerFactory();
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-        EntityManagerLoggingProxy entityManagerLoggingProxy = new EntityManagerLoggingProxy(entityManager, new ConsoleLogging());
-
-        Employee employee = new Employee("John", "Doe", null, null);
-        Employee employeeDB = entityManagerLoggingProxy.insert(employee);
-
-        Employee employee2 = entityManagerLoggingProxy.find(Employee.class, 1);
-        entityManagerLoggingProxy.delete(employee2);
+        Demo demo = new Demo();
+//        demo.testInsert();
+//        demo.testInsertWithManyToOne();
+//        demo.testUpdate();
+//        demo.testDelete();
+//        demo.testFindById();
+//        demo.testWhere();
+//        demo.testGroupByHaving();
+//        demo.testCloseConnection();
 
 
     }

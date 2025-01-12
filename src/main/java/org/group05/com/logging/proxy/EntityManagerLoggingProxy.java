@@ -5,6 +5,7 @@ import org.group05.com.entityManager.EntityManagerContract;
 import org.group05.com.logging.strategy.LoggingStrategy;
 
 import java.util.List;
+import java.util.Map;
 
 public class EntityManagerLoggingProxy implements EntityManagerContract {
     private final LoggingStrategy loggingStrategy;
@@ -40,7 +41,8 @@ public class EntityManagerLoggingProxy implements EntityManagerContract {
         loggingStrategy.log("Closing entity manager");
         entityManager.close();
     }
-    public Object executeQuery(String query){
+
+    public List<Object[]> executeQuery(String query, Object... params) {
         loggingStrategy.log("Executing query: " + query);
         return entityManager.executeQuery(query);
     }

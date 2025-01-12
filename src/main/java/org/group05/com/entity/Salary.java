@@ -50,12 +50,12 @@ public class Salary {
     @Override
     public String toString() {
         String str = "Salary {" +
-                ",\n salary=" + salary +
-                ",\n fromDate=" + fromDate +
-                ",\n toDate=" + toDate +
-                "\n employee=" ;
+                " salary=" + salary +
+                ", fromDate=" + fromDate +
+                ", toDate=" + toDate +
+                ", employee=" ;
         if (employee != null) {
-            str += employee.getFirstName() + "  " + employee.getId() + " " +"}\n";
+            str += "name: " + employee.getFirstName() + " - id: " + employee.getId() + " " +"}\n";
         } else {
             str += "null" + "}\n";
         }

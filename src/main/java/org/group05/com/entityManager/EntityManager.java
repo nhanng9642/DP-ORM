@@ -5,8 +5,7 @@ import org.group05.com.annotations.Id;
 import org.group05.com.annotations.ManyToOne;
 import org.group05.com.annotations.OneToMany;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -257,11 +256,27 @@ public abstract class EntityManager implements EntityManagerContract   {
         }
     }
 
-    public abstract Object executeQuery(String query);
+    public List<Object[]> executeQuery(String query) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Object[]> result = new ArrayList<>();
+            while (resultSet.next()) {
+                Object[] row = new Object[resultSet.getMetaData().getColumnCount()];
+                for (int i = 0; i < row.length; i++) {
+                    row[i] = resultSet.getObject(i + 1);
+                }
+                result.add(row);
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error while executing query", e);
+        }
+    }
 
 
     // Helper methods
-    private <T> void mapResultSetToEntity(ResultSet resultSet, T entity, Object value) {
+    public <T> void mapResultSetToEntity(ResultSet resultSet, T entity, Object value) {
         try {
             Class<?> entityClass = entity.getClass();
             Object val;
@@ -274,7 +289,8 @@ public abstract class EntityManager implements EntityManagerContract   {
                 } else if (field.isAnnotationPresent(OneToMany.class)) {
                     Class<?> parentClass = Utils.getFieldType(field);
                     String foreignKeyName = Utils.getForeignKeyName(entityClass, parentClass);
-                    val = find(parentClass, foreignKeyName, value);
+                    Object parentValue = resultSet.getObject(Utils.getPrimaryKeyName(entityClass));
+                    val = find(parentClass, foreignKeyName, parentValue);
                 } else {
                     String columnName = Utils.getColumnName(entityClass, field.getName());
                     val = resultSet.getObject(columnName);
